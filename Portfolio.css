@@ -1,41 +1,45 @@
 /* Barevné proměnné */
 :root {
-    /* Světlý režim */
+     /* Světlý režim */
+  --bg-color: #e6f4f3; /* pozadí stránky */
+  --text-color: #1a1a1a; /* hlavní barva textu */
+  --text-secondary: #ffffff; /* sekundární barva textu (např. nadpisy) */
+  --card-bg: #ffffff; /* pozadí karet */
+  --backfround-tertiary: #99e7dfdc; /* světle šedá pro karty */
+  --box-color: #1d756e; /* světlejší stín pro karty */
 
-  --bg-color: #e6f4f3;
-  --text-color: #1a1a1a;
-  --text-secondary: #ffffff;
-  --card-bg: #ffffff;
-  --backfround-tertiary: #99e7dfdc; 
-  --box-color: #1d756e; 
+  --header-bg: #1d756e;   /* tmavší tón záhlaví */
+  --sidebar-bg: #279e93;  /* o něco světlejší než záhlaví */
 
+  --tag-bg: #ddd; /* pozadí štítků */
+  --tag-text: #88289b; /* barva textu štítků */
+  --button-bg: #333; /* pozadí tlačítek */
+  --button-text: #fff; /* barva textu tlačítek */
 
-  --header-bg: #1d756e;   
-  --sidebar-bg: #279e93;  
-
-  --tag-bg: #ddd;
-  --tag-text: #88289b;
-  --button-bg: #333;
-  --button-text: #fff;
-
+  /* Volitelné barevné témata */
+  --color-1: #1d756e;
+  --color-2: #43a047;
+  --color-3: #f4511e;
+  --color-4: #8e24aa;
+  --color-5: #fdd835;
 }
 
-/* Tmavý režim */
+/* Přepsání barev pro tmavý režim */
 body.dark-mode {
-  --bg-color: #121212;
-  --text-color: #f1f1f1;
+  --bg-color: #121212; /* pozadí pro tmavý režim */
+  --text-color: #f1f1f1; /* světlá barva textu */
   --text-secondary: #ffffff;
-  --card-bg: #1e1e1e;
-  --backfround-tertiary: #414040;;
+  --card-bg: #1e1e1e; /* tmavší pozadí karet */
+  --backfround-tertiary: #414040; /* tmavší šedá */
   --box-color: #ffffff;
 
-  --header-bg: #414040;   
-  --sidebar-bg: #2c2c2c;  
+  --header-bg: #414040;   /* tmavší než sidebar */
+  --sidebar-bg: #2c2c2c;  /* o něco světlejší než pozadí */
 
-  --tag-bg: #444;
-  --tag-text: #ddd;
-  --button-bg: #e7e7e7;
-  --button-text: #fff;
+  --tag-bg: #444; /* tmavé pozadí štítků */
+  --tag-text: #ddd; /* světlý text štítků */
+  --button-bg: #e7e7e7; /* světlé pozadí tlačítek */
+  --button-text: #fff; /* bílý text tlačítek */
 }
 
 /* Resetování stylů */
