@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Manga Earthquake Prediction</title>
   <link rel="stylesheet" href="Portfolio.css" />
-  <script src="Portfolio.js" defer></script> <!-- Assuming main.js has your dark mode + listen code -->
+  <script src="Portfolio.js" defer></script> 
 </head>
 <body>
     <div id="warmOverlay"></div>
@@ -18,20 +18,35 @@
     </a>
   </div>
     <div id="modeButtons">
-  <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button>
+  <button id="darkModeToggle" aria-label="Toggle Dark Mode">🌙</button> <!-- Tlačítko pro přepnutí tmavého režimu -->
 
 </div>
   </header>
 
-    <div class="side-actions top">
+      <aside id="sidebarSecondary" class="sidebar-hidden">   <!-- Skrytý boční panel -->
+  <nav>
+    <ul>
+      <li><a href="index.html">Recent</a></li>  <!-- Odkaz na hlavní stránku -->
+      <li><a href="https://www.instagram.com/barackobama/" target="_blank" rel="noopener noreferrer">About US</a></li>   <!-- Odkaz na Instagram -->
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+  <div class="qr-wrapper">
+    <img src="pictures/qr-code.png" alt="QR Code" class="qr-image" /> <!-- QR kód na podporu nebo kontakt -->
+  </div>
+</aside>
+</div>
+    <div class="side-actions top"> <!-- Tlačítka pro akce v horní části -->
         <a href="index.html" class="side-button" title="Home">🏠</a>
         <button id="listenButton" class="side-button" title="Listen">🔊</button>
         <button id="likeButton" class="side-button" title="Like this article">❤️</button>
         <button id="commentButton" class="side-button" title="Add Comment">💬</button>
+        <button id="sidebarToggle" class="side-button" title="Toggle Sidebar">☰</button>
     </div>
 
-  <main class="article-page">
-    <div id="article-wrapper" data-article-id="manga">
+
+  <main class="article-page"> <!-- Hlavní obsah stránky -->
+    <div id="article-wrapper" data-article-id="manga"> <!-- Wrapper pro článek -->
       <div id="article-content">
         <span id="reading-time"></span>
         <h2 class="headline">Japan Earthquake Prediction Manga Sparks Widespread Anxiety</h2>
@@ -62,7 +77,7 @@
 
         <p>As the manga continues to trend, authorities are doubling down on their messaging: stay informed, stay ready—but don’t panic.</p>
 
-        <div class="tags">
+        <div class="tags"> <!-- Tagy pro článek -->
           <span class="tag">#Japan</span>
           <span class="tag">#Earthquake</span>
           <span class="tag">#Manga</span>
@@ -72,8 +87,7 @@
     </div>  <!-- end article-wrapper -->
     <hr class="comment-divider" />
 
-    <!-- comment modal (popup form) -->
-    <div id="commentModal" class="comment-modal hidden">
+    <div id="commentModal" class="comment-modal hidden"> <!-- Modal na komentáře -->
     <div class="comment-box">
         <h3>Leave a Comment</h3>
         <label>
@@ -91,8 +105,7 @@
     </div>
     </div>
 
-    <!-- comment display section -->
-    <div id="commentsSection" class="comments-section">
+    <div id="commentsSection" class="comments-section"> <!-- Sekce pro zobrazení komentářů -->
     <h2 class="comments-heading">Comments</h2>
     <div id="commentList"></div>
     </div>
