@@ -1,9 +1,8 @@
-const articleId = window.location.pathname.replace(/\//g, '-');
-// Constants for localStorage keys (unique per article)
-const STORAGE_KEY = 'comments-manga';          // for comments
-const LIKE_STORAGE_KEY = 'liked-manga-article'; // for likes
+const articleId = window.location.pathname.replace(/\//g, '-'); 
+const STORAGE_KEY = 'comments-manga';          // Klíče pro localStorage, aby se ukládaly komentáře a lajky pro tento článek
+const LIKE_STORAGE_KEY = 'liked-manga-article'; // Klíč pro uložení stavu lajku článku
 
-// VIDEO IFRAME CLICK TO PLAY
+// Přehrání videa po kliknutí na video wrapper (nahrazení wrapperu iframe s videem)
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.video-card .video-wrapper').forEach(wrapper => {
     wrapper.addEventListener('click', () => {
@@ -11,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const videoId = article.dataset.videoId;
       if (!videoId) return;
 
-      // Create iframe with autoplay
+      // Vytvoření iframe pro YouTube video
       const iframe = document.createElement('iframe');
       iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&mute=1&rel=0`;
       iframe.frameBorder = "0";
@@ -20,29 +19,29 @@ document.addEventListener('DOMContentLoaded', () => {
       iframe.style.width = '100%';
       iframe.style.height = '180px';
 
-      // Replace wrapper content with iframe
+      // Vyčištění wrapperu a přidání iframe
       wrapper.innerHTML = '';
       wrapper.appendChild(iframe);
     });
   });
 });
 
-// TAG FILTERING & HIGHLIGHTING
+// Filtrace článků podle tagů a zvýraznění aktivního tagu
 document.addEventListener('DOMContentLoaded', () => {
   const tags = document.querySelectorAll('.tag');
   let activeFilter = null;
 
   tags.forEach(tag => {
-    tag.style.cursor = 'pointer';
+    tag.style.cursor = 'pointer'; // Přidání kurzoru pro indikaci kliknutí
 
     tag.addEventListener('click', () => {
       const clickedTag = tag.dataset.tag;
 
-      if (activeFilter === clickedTag) {
+      if (activeFilter === clickedTag) { // Pokud je kliknutý tag již aktivní, zrušíme filtraci
         activeFilter = null;
         showAllArticles();
         clearTagHighlight(tags);
-      } else {
+      } else {                           // Pokud je kliknutý tag jiný, nastavíme ho jako aktivní a filtrujeme články
         activeFilter = clickedTag;
         filterArticlesByTag(activeFilter);
         highlightActiveTag(tags, activeFilter);
@@ -51,22 +50,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-function clearTagHighlight(tags) {
+function clearTagHighlight(tags) { // Odstranění zvýraznění všech tagů
   tags.forEach(tag => tag.classList.remove('active'));
 }
 
-function highlightActiveTag(tags, tagName) {
+function highlightActiveTag(tags, tagName) {  // Zvýraznění aktivního tagu
   tags.forEach(tag => {
     tag.classList.toggle('active', tag.dataset.tag === tagName);
   });
 }
 
-function showAllArticles() {
+function showAllArticles() {  // Zobrazení všech článků
   const articles = document.querySelectorAll('.card');
   articles.forEach(article => article.style.display = '');
 }
 
-function filterArticlesByTag(tag) {
+function filterArticlesByTag(tag) { // Skrývání článků, které neobsahují zvolený tag
   const articles = document.querySelectorAll('.card');
   articles.forEach(article => {
     const articleTags = Array.from(article.querySelectorAll('.tag')).map(t => t.dataset.tag);
@@ -78,7 +77,7 @@ function filterArticlesByTag(tag) {
   });
 }
 
-// DARK MODE TOGGLE
+//  Přepínač tmavého režimu
 const toggleButton = document.getElementById("darkModeToggle");
 toggleButton.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
@@ -87,7 +86,7 @@ toggleButton.addEventListener("click", () => {
   toggleButton.textContent = isDark ? "☀️" : "🌙";
 });
 
-// TEXT-TO-SPEECH
+// Přehrávání článku pomocí Web Speech API
 const listenButton = document.getElementById("listenButton");
 const articleContent = document.getElementById("article-content");
 
@@ -95,60 +94,60 @@ let isSpeaking = false;
 let utterance;
 
 listenButton.addEventListener("click", () => {
-  if (isSpeaking) {
+  if (isSpeaking) { // Pokud už mluvíme, zastavíme přehrávání
     speechSynthesis.cancel();
     isSpeaking = false;
     listenButton.textContent = "🔊";
     return;
   }
 
-  const text = articleContent.innerText || articleContent.textContent;
+  const text = articleContent.innerText || articleContent.textContent; // Získání textu z obsahu článku
   utterance = new SpeechSynthesisUtterance(text);
   utterance.lang = "en-US";
 
-  utterance.onend = () => {
+  utterance.onend = () => { // Po skončení mluvení nastavíme stav
     isSpeaking = false;
     listenButton.textContent = "🔊";
   };
 
-  speechSynthesis.speak(utterance);
+  speechSynthesis.speak(utterance); // Spustíme mluvení
   isSpeaking = true;
   listenButton.textContent = "⏹";
 });
 
-// READING TIME CALCULATION
+// Výpočet času čtení článku
 document.addEventListener("DOMContentLoaded", () => {
   const articleWrapper = document.getElementById("article-wrapper");
 
-  if (articleWrapper) {
+  if (articleWrapper) { // Pokud existuje wrapper článku, spočítáme slova
     const text = articleWrapper.innerText || articleWrapper.textContent;
     const words = text.trim().split(/\s+/).length;
     const wordsPerMinute = 200;
     const readingTime = Math.ceil(words / wordsPerMinute);
 
-    const readingTimeElement = document.getElementById("reading-time");
+    const readingTimeElement = document.getElementById("reading-time");   // Element pro zobrazení času čtení
     if (readingTimeElement) {
       readingTimeElement.textContent = `⏱ ${readingTime} min read`;
     }
   }
 });
 
-// LIKE BUTTON WITH localStorage
+// Lajkování článku pomocí localStorage
 document.addEventListener("DOMContentLoaded", () => {
   const likeButton = document.getElementById("likeButton");
 
-  if (localStorage.getItem(LIKE_STORAGE_KEY) === "true") {
+  if (localStorage.getItem(LIKE_STORAGE_KEY) === "true") {  // Zkontrolujeme, jestli je článek již lajkovaný
     likeButton.classList.add("liked");
   }
 
-  likeButton.addEventListener("click", () => {
+  likeButton.addEventListener("click", () => {  // Přepnutí stavu lajku při kliknutí na tlačítko
     const liked = likeButton.classList.toggle("liked");
     localStorage.setItem(LIKE_STORAGE_KEY, liked);
   });
 });
 
 
-// COMMENT SYSTEM WITH localStorage
+// Komentáře: přidání, zobrazení a uložení do localStorage
 
 const commentModal = document.getElementById('commentModal');
 const commentButton = document.getElementById('commentButton');
@@ -158,19 +157,19 @@ const commentName = document.getElementById('commentName');
 const commentText = document.getElementById('commentText');
 const commentList = document.getElementById('commentList');
 
-// Show comment modal
+// Otevření modálního okna pro přidání komentáře
 commentButton.addEventListener('click', () => {
   commentModal.classList.remove('hidden');
 });
 
-// Hide modal and clear inputs
+// Skrytí modálního okna a vyčištění vstupů
 cancelComment.addEventListener('click', () => {
   commentModal.classList.add('hidden');
   commentName.value = '';
   commentText.value = '';
 });
 
-// Load saved comments on page load
+// Načtení uložených komentářů z localStorage při načtení stránky
 window.addEventListener('DOMContentLoaded', () => {
   const savedComments = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
   savedComments.forEach(({ name, comment }) => {
@@ -178,7 +177,7 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Submit comment: validate, save, append, clear, close
+// Odeslání komentáře: přidání do DOM a uložení do localStorage
 submitComment.addEventListener('click', () => {
   const name = commentName.value.trim();
   const comment = commentText.value.trim();
@@ -199,7 +198,7 @@ submitComment.addEventListener('click', () => {
   commentModal.classList.add('hidden');
 });
 
-// Append comment safely to the DOM
+// Funkce pro přidání komentáře do DOM
 function appendCommentToDOM(name, comment) {
   const div = document.createElement('div');
   div.classList.add('comment-entry');
@@ -207,10 +206,41 @@ function appendCommentToDOM(name, comment) {
   commentList.appendChild(div);
 }
 
-// Simple HTML escape to avoid injection
+// Funkce pro únik HTML znaků, aby se zabránilo XSS útokům
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
   return div.innerHTML;
 }
+
+const sidebar = document.getElementById("sidebarSecondary");
+const toggleBtn = document.getElementById("sidebarToggle");
+
+if (sidebar && toggleBtn) { // Inicializace sidebaru a přepínače
+  toggleBtn.setAttribute("aria-expanded", "false");
+
+  toggleBtn.addEventListener("click", () => {
+    const isVisible = sidebar.classList.toggle("sidebar-visible");
+    sidebar.classList.toggle("sidebar-hidden", !isVisible);
+    toggleBtn.setAttribute("aria-expanded", isVisible ? "true" : "false");
+  });
+
+  document.addEventListener("click", (event) => { // Kliknutí mimo sidebar a přepínač skryje sidebar
+    if (!sidebar.contains(event.target) && !toggleBtn.contains(event.target)) {
+      sidebar.classList.remove("sidebar-visible");
+      sidebar.classList.add("sidebar-hidden");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  // Zavření sidebaru pomocí klávesy Escape
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      sidebar.classList.remove("sidebar-visible");
+      sidebar.classList.add("sidebar-hidden");
+      toggleBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+}
+
 
