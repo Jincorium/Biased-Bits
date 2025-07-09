@@ -1,31 +1,26 @@
- /* Color Variables */
+/* Barevné proměnné */
 :root {
-  /* Light Mode */
+    /* Světlý režim */
+
   --bg-color: #e6f4f3;
   --text-color: #1a1a1a;
   --text-secondary: #ffffff;
   --card-bg: #ffffff;
-  --backfround-tertiary: #99e7dfdc; /* light gray for cards */
-  --box-color: #1d756e; /* light shadow for cards */
+  --backfround-tertiary: #99e7dfdc; 
+  --box-color: #1d756e; 
 
 
-  --header-bg: #1d756e;   /* darker tone */
-  --sidebar-bg: #279e93;  /* slightly lighter than header */
+  --header-bg: #1d756e;   
+  --sidebar-bg: #279e93;  
 
   --tag-bg: #ddd;
   --tag-text: #88289b;
   --button-bg: #333;
   --button-text: #fff;
 
-  /* Optional numbered theme colors */
-  --color-1: #1d756e;
-  --color-2: #43a047;
-  --color-3: #f4511e;
-  --color-4: #8e24aa;
-  --color-5: #fdd835;
 }
 
-/* Dark Mode Overrides */
+/* Tmavý režim */
 body.dark-mode {
   --bg-color: #121212;
   --text-color: #f1f1f1;
@@ -34,8 +29,8 @@ body.dark-mode {
   --backfround-tertiary: #414040;;
   --box-color: #ffffff;
 
-  --header-bg: #414040;   /* darker than sidebar */
-  --sidebar-bg: #2c2c2c;  /* slightly lighter */
+  --header-bg: #414040;   
+  --sidebar-bg: #2c2c2c;  
 
   --tag-bg: #444;
   --tag-text: #ddd;
@@ -43,24 +38,25 @@ body.dark-mode {
   --button-text: #fff;
 }
 
-/* Reset */
+/* Resetování stylů */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 body {
-  /* Use the newspaper image as background */
+  /* Pozadí */
   background-image: url('https://static.vecteezy.com/system/resources/previews/023/729/676/large_2x/newspaper-wallpaper-old-newspaper-background-generative-ai-photo.jpg');
-  background-size: cover;      /* cover entire screen */
+  background-size: cover;      /* pokrytí celé obrazovky */
   background-position: center;
   background-repeat: no-repeat;
 
-  /* Optional: add an overlay for better readability */
+  /* Volitelné: přidání překryvu pro lepší čitelnost */
   position: relative;
   z-index: 0;
 }
 
+/* Základní styly pro tělo a html */
 body, html {
   height: 100%;
   font-family: Arial, sans-serif;
@@ -68,7 +64,7 @@ body, html {
   color: var(--text-color);
 }
 
-/* Header - sticky top */
+/* Hlavní navigační lišta */
 header {
   position: sticky;
   top: 0;
@@ -77,13 +73,13 @@ header {
   padding: 1rem;
   z-index: 100;
 
-  /* Align text and image side by side */
+  /* Zarovnání textu a obrázku vedle sebe */
   display: flex;
   align-items: center;
-  justify-content: space-between; /* or flex-start if you want them closer together */
+  justify-content: space-between; /* Zarovnání textu a obrázku vedle sebe */
 }
 
-header h1,
+header h1,  /* Hlavní nadpis */
 header .support-text {
   font-size: 1.4rem;
   margin: 0;
@@ -91,25 +87,66 @@ header .support-text {
 font-weight: 700;
 }
 
-.header-support {
+.header-support { /* Podpora text a logo */
   display: flex;
   align-items: center;
-  gap: 0.5rem; /* space between text and logo */
+  gap: 0.5rem; /* prostor mezi textem a logem */
 }
 
+.header-search {  /* Vyhledávací lišta */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.search-wrapper {
+ width: 600px;
+  max-width: 100%; /* responsivní, nepřeteče na menších obrazovkách */
+  padding: 0.5rem 1rem;
+  border-radius: 999px; /* tvar tablety */
+  border: 1px solid var(--text-secondary);
+  background-color: var(--card-bg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+#searchInput:focus { /* Zvýraznění při zaměření */
+  border-color: var(--color-1);
+  box-shadow: 0 0 0 3px rgba(29, 117, 110, 0.3);
+}
+#searchInput { /* Styl pro vyhledávací vstup */
+  width: 600px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 999px; /* tvar tablety */
+  border: 1px solid var(--text-secondary);
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  outline: none;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+#searchResultBox { /* Styl pro vyhledávací výsledky */
+  margin-top: 6px;
+  font-size: 0.9rem;
+  color: var(--text-color);
+  font-weight: 600;
+  display: none;
+}
 .donation-icon {
-  height: 36px; /* Smaller, consistent size */
+  height: 36px; /* Menší, konzistentní velikost */
   width: auto;
   margin-left: 1rem;
 }
 
-/* Container with sidebar and main */
+
+/* Kontejner se postranním panelem a hlavním obsahem */
 .container {
   display: flex;
   height: calc(100vh - 56px);
 }
 
-/* Sidebar - sticky on left */
+/* Postranní panel */
 aside {
   position: sticky;
   top: 56px;
@@ -126,19 +163,19 @@ aside {
 aside nav ul {
   list-style: none;
   padding: 0;
-  margin: 2rem 0 0;  /* ⬅️ pushes the links downward */
+  margin: 2rem 0 0;  /* posune odkazy dolů */
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
   align-items: center;
 }
 
-aside nav ul li + li {
+aside nav ul li + li { /* mezera mezi položkami */
   margin-top: 1rem;
 }
 
-aside nav a {
-font-size: 1.3rem;
+aside nav a { /* Odkazy v postranním panelu */
+  font-size: 1.3rem;
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: bold;
@@ -147,8 +184,35 @@ font-size: 1.3rem;
 aside nav a:hover {
   text-decoration: underline;
 }
+#sidebarSecondary.sidebar-hidden {
+  display: none;           /* skrytý */
+  position: fixed;         /* pevný překryv */
+  top: 72px;               /* pod záhlavím */
+  left: 0;
+  width: 160px;
+  height: calc(100vh - 72px);
+  background: var(--sidebar-bg);
+  flex-direction: column;
+  padding-left: 1rem;
+  z-index: 10000;          /* velmi vysoké, aby bylo nahoře */
+  box-shadow: 2px 0 8px rgba(0,0,0,0.2); /* jemný stín */
+}
+/* Sidebar viditelný */
+#sidebarSecondary.sidebar-visible {
+  display: flex;
+  position: fixed;
+  top: 72px;
+  left: 0;
+  width: 160px;
+  height: calc(100vh - 72px);
+  background: var(--sidebar-bg);
+  flex-direction: column;
+  padding-left: 1rem;
+  z-index: 10000;
+  box-shadow: 2px 0 8px rgba(0,0,0,0.3);
+}
 
-/* Main content */
+/* Hlavní obsah */
 main {
   flex: 1;
   background: var(--bg-color);
@@ -157,7 +221,7 @@ main {
 }
 
 
-/* Card styling */
+/* Karta */
 .card {
   background: var(--card-bg);
   border-radius: 6px;
@@ -168,7 +232,7 @@ main {
   color: var(--text-color);
 }
 
-.card img,
+.card img, 
 .video-wrapper {
   width: 100%;
   height: 240px;
@@ -181,7 +245,7 @@ main {
 .video-wrapper {
   position: relative;
   cursor: pointer;
-  background-color: #000; /* fallback if no image */
+  background-color: #000; /* pokud není obrázek */
 }
 
 .video-wrapper::after {
@@ -196,7 +260,7 @@ main {
   pointer-events: none;
 }
 
-.video-wrapper:hover::after {
+.video-wrapper:hover::after { /* Zvýraznění při najetí myší */
   opacity: 1;
 }
 
@@ -206,7 +270,7 @@ main {
   flex-grow: 0;
 }
 
-.tags {
+.tags { /* Tagy */
   padding: 0 1rem 1rem;
   color: var(--tag-text);
 }
@@ -229,7 +293,7 @@ main {
   display: block;
 }
 
-/* Play Button */
+/* Tlačítko pro přehrávání */
 .play-button {
   position: absolute;
   top: 50%;
@@ -255,7 +319,7 @@ main {
   border-color: transparent transparent transparent white;
 }
 
-/* Dark mode button styling */
+/* Tlačítko pro přepínání tmavého režimu */
 #darkModeToggle {
   position: fixed;
   bottom: 20px;
@@ -280,14 +344,14 @@ main {
 }
 
 
-
+/* Tlačítka pro přepínání režimů */
 #modeButtons {
   position: fixed;
   bottom: 20px;
   right: 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;  /* space between buttons */
+  gap: 10px;  /* prostor mezi tlačítky */
   z-index: 1001;
 }
 
@@ -303,18 +367,19 @@ main {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Active tag style for light mode */
+/* Aktivní styl pro tagy v světlém režimu */
 .tags span.active {
-  background: var(--color-1); /* or any highlight color */
+  background: var(--color-1); /* nebo jakákoliv zvýrazňující barva */
   color: white;
 }
 
-/* Dark mode active tag */
+/* Aktivní styl pro tagy v tmavém režimu */
 body.dark-mode .tags span.active {
-  background: #3aafa9; /* a brighter teal or highlight */
+  background: #3aafa9; /* nebo jakákoliv zvýrazňující barva */
   color: #f1f1f1;
 }
 
+/* Odkazy na karty */
 .card-link {
   text-decoration: none;
   color: inherit;
@@ -324,6 +389,7 @@ body.dark-mode .tags span.active {
   text-decoration: none;
 }
 
+/* Tlačítko pro poslech článku */
 #listenButton {
   background-color: #1e88e5;
   color: white;
@@ -337,14 +403,14 @@ body.dark-mode .tags span.active {
 #listenButton:hover {
   background-color: #1565c0;
 }
-/* Articles grid: 3 in a row */
+/* Karta */
 .articles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
-#article-content { 
+#article-content { /* Obsah článku */
   max-width: 750px;
   margin: 0 auto;
   padding: 0 1rem;
@@ -352,13 +418,13 @@ body.dark-mode .tags span.active {
   font-size: 1.05rem;
 }
 
-#article-content h1 {
+#article-content h1 { /* Hlavní nadpis článku */
   font-size: 2rem;
   margin-bottom: 1rem;
   text-align: center;
 }
 
-#article-content h2 {
+#article-content h2 { /* Podnadpisy */
   font-size: 1.5rem;
   margin: 1.5rem 0 1rem;
 }
@@ -366,9 +432,9 @@ body.dark-mode .tags span.active {
 #article-content p {
   margin-bottom: 1.2rem;
 }
-#article-wrapper {
+#article-wrapper {  /* Kontejner pro článek */
   position: relative;
-  background-color: (--text-secondary); /* white with slight transparency */
+  background-color: (--text-secondary); /* bílá s mírnou průhledností */
   padding: 2rem;
   border-radius: 12px;
   max-width: 900px;
@@ -377,7 +443,7 @@ body.dark-mode .tags span.active {
   color: var(--text-color);
   z-index: 1;
 
-  /* Add newspaper columns */
+  /* Přidání novinových sloupců */
   column-count: 2;
   column-gap: 2rem;
   column-rule: 1px solid rgba(0,0,0,0.1);
@@ -390,10 +456,11 @@ body.dark-mode .tags span.active {
 }
 #article-wrapper p {
   position: relative;
-  padding-top: 12px; /* space for the rectangle */
-  margin-bottom: 1.3rem;  /* spacing between paragraphs */
+  padding-top: 12px; /* prostor pro obdélník */
+  margin-bottom: 1.3rem;  /* prostor mezi odstavci */
 }
-
+ 
+/* Přidání obdélníku před každý odstavec */
 #article-wrapper p::before {
   content: "";
   position: absolute;
@@ -403,7 +470,8 @@ body.dark-mode .tags span.active {
   height: 6px;
   background-color: var(--color-1);
   border-radius: 2px;
-}
+} 
+/* Obrázky v článku */
 #article-wrapper img {
   width: 320px;
   height: 180px;
@@ -411,7 +479,7 @@ body.dark-mode .tags span.active {
   border-radius: 6px;
 }
 
-
+/* Postranní akce */
 .side-actions {
   position: sticky;
   top: 120px;
@@ -427,6 +495,7 @@ body.dark-mode .tags span.active {
   z-index: 2;
 }
 
+/* Tlačítka pro postranní akce */
 .side-button,
 .back-link {
   background-color: var(--header-bg);
@@ -462,7 +531,7 @@ body.dark-mode .tags span.active {
 }
 
 #likeButton {
-  color: rgba(255, 0, 0, 0.6); /* light red by default */
+  color: rgba(255, 0, 0, 0.6); /* světle červená jako výchozí */
    transform: scale(1.05);
 }
 
@@ -471,6 +540,7 @@ body.dark-mode .tags span.active {
   transform: scale(1.05);
 }
 
+/* Modální okno pro komentáře */
 .comment-modal {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -481,10 +551,12 @@ body.dark-mode .tags span.active {
   z-index: 9999;
 }
 
+/* Skrytí modálního okna */
 .comment-modal.hidden {
   display: none;
 }
 
+/* Obsah modálního okna */
 .comment-box {
   background: var(--card-bg);
   padding: 1.5rem;
@@ -507,6 +579,7 @@ body.dark-mode .tags span.active {
   font-size: 0.9rem;
 }
 
+/* Styl pro vstupy a textové oblasti v modálním okně */
 .comment-box input,
 .comment-box textarea {
   width: 100%;
@@ -527,6 +600,7 @@ body.dark-mode .tags span.active {
   justify-content: space-between;
 }
 
+/* Tlačítka v modálním okně */
 .comment-buttons button {
   padding: 0.5rem 1.2rem;
   border: none;
@@ -542,6 +616,7 @@ body.dark-mode .tags span.active {
   background: var(--button-bg-hover, #555);
 }
 
+/* Styl pro komentáře */
 .comment-divider {
   border: none;
   border-top: 4px solid var(--sidebar-bg); /* Use your theme color */
@@ -561,6 +636,7 @@ body.dark-mode .tags span.active {
   padding-left: 0.25rem; /* align with <p> tag text */
 }
 
+/* Styl pro jednotlivé komentáře */
 .comment-entry {
   margin-bottom: 1rem;
   padding: 0.75rem 1rem;
@@ -571,6 +647,7 @@ body.dark-mode .tags span.active {
   line-height: 1.5;
 }
 
+/* Styl pro jméno komentujícího */
 .layout-wrapper {
   display: flex;
   justify-content: center;
@@ -578,7 +655,7 @@ body.dark-mode .tags span.active {
   max-width: 1200px;
   margin: 0 auto;
 }
-@media (max-width: 768px) {
+@media (max-width: 768px) { /* Pro menší obrazovky */
   .layout-wrapper {
     flex-direction: column;
     align-items: center;
@@ -592,25 +669,19 @@ body.dark-mode .tags span.active {
     background: transparent;
   }
 }
-.comments-heading {
+.comments-heading { /* Nadpis sekce komentářů */
   margin-bottom: 1.0rem;
 }
 
-.qr-wrapper {
+.qr-wrapper {   /* Kontejner pro QR kód */
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
 }
 
-.qr-image {
+.qr-image { /* Styl pro QR kód */
   width: 50px;
   height: 50px;
 }
 
-/* Optional: tag color codes for visual identity */
-.tag.color-1 { background-color: var(--color-1); color: white; }
-.tag.color-2 { background-color: var(--color-2); color: white; }
-.tag.color-3 { background-color: var(--color-3); color: white; }
-.tag.color-4 { background-color: var(--color-4); color: white; }
-.tag.color-5 { background-color: var(--color-5); color: black; }
